@@ -1341,7 +1341,7 @@ local showKillsButton = Killer:AddButton("Kill Counter UI", function()
 			titleLabel.Size = UDim2.new(1, 0, 0, 20)
 			titleLabel.Position = UDim2.new(0, 0, 0, 0)
 			titleLabel.BackgroundTransparency = 1
-			titleLabel.Text = "Project V1"
+			titleLabel.Text = "Syniox Public"
 			titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 			titleLabel.Font = Enum.Font.SourceSansBold
 			titleLabel.TextScaled = true
@@ -2413,3 +2413,4 @@ CreditsTab:AddButton("Copy Discord Invite", function()
     end
 
 end)
+
