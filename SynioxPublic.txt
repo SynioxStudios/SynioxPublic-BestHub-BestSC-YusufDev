@@ -2400,17 +2400,19 @@ fastStrengthFolder:AddSwitch("Hide All Frames", function(bool)
     end
 end)
 
-local credits = window:AddTab("Credits")
-CreditsTab:AddLabel("Script Made ByYusuf")
-CreditsTab:AddLabel("Syniox V2")
-CreditsTab:AddLabel("Those who helped Yusuf // HALİS")
-CreditsTab:AddLabel("SCRİPT BY YUSUF")
-CreditsTab:AddLabel("TY FOR HELPİNG TO HALİS ❤️")
-CreditsTab:AddLabel("THANKS FOR USİNG THİS SCRİPT 🚀")
-CreditsTab:AddButton("Copy Discord Invite", function()
+-- Credits Tab Bölümü
+local credits = window:AddTab("Credits") -- Değişken adı 'credits'
+
+credits:AddLabel("Script Made By Yusuf")
+credits:AddLabel("Syniox V2")
+credits:AddLabel("Those who helped Yusuf // HALİS")
+credits:AddLabel("SCRİPT BY YUSUF")
+credits:AddLabel("TY FOR HELPİNG TO HALİS ❤️")
+credits:AddLabel("THANKS FOR USİNG THİS SCRİPT 🚀")
+
+credits:AddButton("Copy Discord Invite", function()
     if setclipboard then
         setclipboard("https://discord.gg/FsG2cGay")
     end
-
 end)
 
