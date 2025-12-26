@@ -1,7 +1,7 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/memejames/elerium-v2-ui-library/main/Library", true))()
 
 local window = library:AddWindow("SYNİOX PUBLIC | MUSCLE LEGENDS | ByYusuf | V1.0", {
-    main_color = Color3.fromRGB(184, 11, 11),
+    main_color = Color3.fromRGB(0, 0, 0),
     min_size = Vector2.new(700, 750),
     can_resize = true,
 })
@@ -37,7 +37,22 @@ task.spawn(function()
     end
 end)
 
-AutoFarm:AddSwitch("Auto Eat Egg", function(state)
+AutoFarm:AddSwitch("🥚Auto Eat Egg 30 Min", function(state)
+    autoEatEnabled = state
+end)
+
+task.spawn(function()
+    while true do
+        if autoEatEnabled then
+            eatProteinEgg()
+            task.wait(3600)
+        else
+            task.wait(1)
+        end
+    end
+end)
+
+AutoFarm:AddSwitch("🥚 Auto Eat Egg 60 Min", function(state)
     autoEatEnabled = state
 end)
 
@@ -1987,7 +2002,7 @@ Misc:AddSwitch("Auto Clear Inventory", function(state)
     autoEatBoostsEnabled = state
 end)
 
-local tabFarming = window:AddTab("Misc v2")
+local tabFarming = window:AddTab("Fast Farm")
 
 tabFarming:AddLabel("Fast Farming").TextSize = 23
 
@@ -2386,7 +2401,6 @@ fastStrengthFolder:AddSwitch("Hide All Frames", function(bool)
 end)
 
 local credits = window:AddTab("Credits")
-
 CreditsTab:AddLabel("Script Made ByYusuf")
 CreditsTab:AddLabel("Syniox V2")
 CreditsTab:AddLabel("Those who helped Yusuf // HALİS")
@@ -2397,4 +2411,5 @@ CreditsTab:AddButton("Copy Discord Invite", function()
     if setclipboard then
         setclipboard("https://discord.gg/FsG2cGay")
     end
+
 end)
