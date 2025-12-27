@@ -2463,21 +2463,27 @@ fastStrengthFolder:AddSwitch("Hide All Frames", function(bool)
     end
 end)
 
--- Credits Tab Bölümü
-local credits = window:AddTab("Credits") -- Değişken adı 'credits'
+-- Credits Sayfası
+local creditsTab = window:AddTab("Credits") 
 
-credits:AddLabel("Script Made By Yusuf")
-credits:AddLabel("Syniox V2")
-credits:AddLabel("Those who helped Yusuf // HALİS")
-credits:AddLabel("SCRİPT BY YUSUF")
-credits:AddLabel("TY FOR HELPİNG TO HALİS ❤️")
-credits:AddLabel("THANKS FOR USİNG THİS SCRİPT 🚀")
+creditsTab:AddLabel("Script Made By Yusuf")
+creditsTab:AddLabel("Syniox V2")
+creditsTab:AddLabel("Contributors: Yusuf // HALIS")
+creditsTab:AddLabel("SCRIPT BY YUSUF")
+creditsTab:AddLabel("Special thanks to HALIS ❤️")
+creditsTab:AddLabel("THANKS FOR USING THIS SCRIPT 🚀")
 
-credits:AddButton("Copy Discord Invite", function()
+creditsTab:AddButton("Copy Discord Invite", function()
     if setclipboard then
         setclipboard("https://discord.gg/FsG2cGay")
+        -- Bildirim ekleyelim ki kopyalandığını anla
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Syniox Hub",
+            Text = "Discord linki kopyalandı!",
+            Duration = 3
+        })
+    else
+        print("Sistem panonuz (clipboard) desteklenmiyor.")
     end
 end)
-
-
 
