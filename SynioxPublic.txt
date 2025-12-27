@@ -1749,20 +1749,88 @@ end)
 
 local Misc = window:AddTab("Misc")
 
-local antiAFKEnabled = true
-Misc:AddButton("Anti Afk", function(bool)
-    antiAFKEnabled = bool
+Misc:AddButton("Anti Afk", function()
+    -- Arka Plan Anti-AFK İşlemi
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:Connect(function()
+        vu:CaptureController()
+        vu:ClickButton2(Vector2.new())
+    end)
+
+    -- GUI Yapılandırması (Koyu Kırmızı Tema)
+    local ScreenGui = Instance.new("ScreenGui")
+    local MainFrame = Instance.new("Frame")
+    local Title = Instance.new("TextLabel")
+    local Separator = Instance.new("Frame")
+    local TimerLabel = Instance.new("TextLabel")
+    local FPSLabel = Instance.new("TextLabel")
+    local UIStroke = Instance.new("UIStroke")
+
+    ScreenGui.Parent = game:GetService("CoreGui")
     
-    if bool then
-        setupAntiAFK()
-    else
-        if antiAFKConnection then
-            antiAFKConnection:Disconnect()
-            antiAFKConnection = nil
-            print("Anti-AFK system disabled")
-        end
-    end
-end, true)
+    -- Ana Panel (130x135 - Koyu Siyah Arka Plan)
+    MainFrame.Name = "Syniox_AntiAFK_DarkRed"
+    MainFrame.Parent = ScreenGui
+    MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Tam Siyah
+    MainFrame.Position = UDim2.new(0.1, 0, 0.1, 0)
+    MainFrame.Size = UDim2.new(0, 130, 0, 135)
+    MainFrame.Active = true
+    MainFrame.Draggable = true
+
+    -- Koyu Kırmızı Kenarlık
+    UIStroke.Parent = MainFrame
+    UIStroke.Color = Color3.fromRGB(150, 0, 0) -- Koyu Kırmızı
+    UIStroke.Thickness = 2
+
+    -- Başlık
+    Title.Parent = MainFrame
+    Title.Size = UDim2.new(1, 0, 0, 30)
+    Title.Text = "Syniox ANTİ-AFK"
+    Title.TextColor3 = Color3.fromRGB(180, 0, 0) -- Koyu Kırmızı Yazı
+    Title.BackgroundTransparency = 1
+    Title.TextSize = 12
+    Title.Font = Enum.Font.SourceSansBold
+
+    -- İnce Ayırıcı Çizgi (Koyu Kırmızı)
+    Separator.Parent = MainFrame
+    Separator.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+    Separator.BorderSizePixel = 0
+    Separator.Position = UDim2.new(0.1, 0, 0, 30)
+    Separator.Size = UDim2.new(0.8, 0, 0, 1)
+
+    -- Süre Etiketi
+    TimerLabel.Parent = MainFrame
+    TimerLabel.Position = UDim2.new(0, 0, 0, 45)
+    TimerLabel.Size = UDim2.new(1, 0, 0, 30)
+    TimerLabel.Text = "Süre: 00:00:00"
+    TimerLabel.TextColor3 = Color3.fromRGB(160, 160, 160) -- Gri beyaz (göz yormaz)
+    TimerLabel.BackgroundTransparency = 1
+    TimerLabel.TextSize = 13
+    TimerLabel.Font = Enum.Font.SourceSans
+
+    -- FPS Etiketi
+    FPSLabel.Parent = MainFrame
+    FPSLabel.Position = UDim2.new(0, 0, 0, 85)
+    FPSLabel.Size = UDim2.new(1, 0, 0, 30)
+    FPSLabel.Text = "FPS: 0"
+    FPSLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
+    FPSLabel.BackgroundTransparency = 1
+    FPSLabel.TextSize = 13
+    FPSLabel.Font = Enum.Font.SourceSans
+
+    -- Canlı Güncelleme Döngüsü
+    local startTime = os.time()
+    game:GetService("RunService").RenderStepped:Connect(function(dt)
+        local diff = os.time() - startTime
+        local h = math.floor(diff / 3600)
+        local m = math.floor((diff % 3600) / 60)
+        local s = diff % 60
+        TimerLabel.Text = string.format("Süre: %02d:%02d:%02d", h, m, s)
+        
+        local currentFps = math.floor(1 / dt)
+        FPSLabel.Text = "FPS: " .. currentFps
+    end)
+end)
 
 local switch = Misc:AddSwitch("Lock Position", function(Value)
     if Value then
@@ -2415,4 +2483,5 @@ credits:AddButton("Copy Discord Invite", function()
         setclipboard("https://discord.gg/FsG2cGay")
     end
 end)
+
 
