@@ -2472,23 +2472,3 @@ creditsTab:AddLabel("Contributors: Yusuf // HALIS")
 creditsTab:AddLabel("SCRIPT BY YUSUF")
 creditsTab:AddLabel("Special thanks to HALIS ❤️")
 creditsTab:AddLabel("THANKS FOR USING THIS SCRIPT 🚀")
-
-creditsTab:AddButton("Copy Discord Invite", function()
-    if setclipboard then
-        setclipboard("https://discord.gg/FsG2cGay")
-        -- Bildirim ekleyelim ki kopyalandığını anla
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Syniox Hub",
-            Text = "Discord linki kopyalandı!",
-            Duration = 3
-        })
-    else
-        print("Sistem panonuz (clipboard) desteklenmiyor.")
-    end
-end)
-
-
-
-
-
-
